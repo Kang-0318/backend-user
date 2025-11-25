@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authroutes");
 const uploadRoutes = require("./routes/upload");
+const connectDB =require('./src/config/db');
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
