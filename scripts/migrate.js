@@ -1,14 +1,14 @@
 // scripts/migrate.js
 require('dotenv').config();
 const mongoose = require('mongoose');
-const connectDB = require('../src/config/db');
+const connectDB = require('../config/db');
 
 // 데이터베이스 연결
 connectDB();
 
 // 모델 import (도메인별 파일 구조에 맞게)
 const User = require('../src/user/model');
-const Reservation = require('../src/reservation/model');
+const Reservation = require('../reservation/model');
 
 async function main() {
   try {
