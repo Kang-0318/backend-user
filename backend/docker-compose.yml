@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: hotel-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: hotel-project
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - hotel-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  hotel-network:
+    driver: bridge
