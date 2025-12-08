@@ -1,0 +1,103 @@
+@use "../../common/variables" as *;
+
+.booking-step-room {
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: $color-text;
+  }
+
+  .booking-summary {
+    background: $color-bg-alt;
+    padding: 1.5rem;
+    border-radius: $border-radius-md;
+    margin-bottom: 2rem;
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+    }
+  }
+
+  .rooms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+
+    .room-card {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+      border: $border;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: $color-primary;
+        box-shadow: $shadow-sm;
+      }
+
+      &.selected {
+        border-color: $color-primary;
+        border-width: 0.2rem;
+        background: rgba($color-primary, 0.05);
+      }
+
+      .room-image {
+        width: 12rem;
+        height: 8rem;
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .room-info {
+        flex: 1;
+
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: $color-text;
+        }
+
+        .room-type {
+          font-size: $font-size-sm;
+          color: $color-text-secondary;
+          margin-bottom: 0.5rem;
+        }
+
+        .room-price {
+          font-size: $font-size-base;
+          font-weight: 600;
+          color: $color-primary;
+        }
+      }
+
+      .room-select {
+        input[type="radio"] {
+          width: 2rem;
+          height: 2rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .booking-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+}

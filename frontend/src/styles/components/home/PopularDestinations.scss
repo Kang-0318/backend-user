@@ -1,0 +1,93 @@
+/* -------------------------------
+   Frame 117  →  section.container
+-------------------------------- */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 70px 104px 0;
+    gap: 80px;
+
+    width: 100%;
+    max-width: 1440px;
+    margin: 100px auto 0;
+    box-sizing: border-box;
+}
+
+/* 내부 영역 */
+.inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* -------------------------------
+   Section Header
+-------------------------------- */
+.section-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text-box {
+        color: #279c79;;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-see-all {
+        padding: 10px 18px;
+        background: #279c79;
+        color: #fff;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+            background: #1f7e61;
+        }
+    }
+}
+
+/* -------------------------------
+   Swiper 영역
+-------------------------------- */
+.destinations-swiper {
+    width: 100%;
+    padding-bottom: 40px;
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #279c79;
+        transition: 0.2s;
+
+        &:hover {
+            color: #1f7e61;
+        }
+    }
+
+    .swiper-pagination-bullet {
+        background: #ccc;
+        opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #279c79;
+    }
+
+}
+
+.destinations-swiper .swiper-button-next,
+.destinations-swiper .swiper-button-prev {
+    display: none;
+}

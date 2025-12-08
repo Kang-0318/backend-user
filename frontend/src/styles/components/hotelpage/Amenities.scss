@@ -1,0 +1,59 @@
+.amenities {
+ padding: 40px 0;
+ border-bottom: 1px solid #e0e0e0;
+
+ .amenities-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #333;
+ }
+
+ .amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+ }
+
+ .amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+   background: #f0f0f0;
+  }
+
+  .amenity-icon {
+   font-size: 20px;
+   width: 24px;
+   text-align: center;
+  }
+
+  .amenity-name {
+   font-size: 14px;
+   color: #333;
+  }
+ }
+
+ .show-more-btn {
+  background: none;
+  border: 1px solid #333;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+   background: #333;
+   color: white;
+  }
+ }
+}

@@ -1,0 +1,52 @@
+@use "../../common/variables" as *;
+@use "../../common/mixins";
+
+.hotel-map {
+  padding: $spacing-section 0 0;
+
+  .map-info {
+    margin-bottom: $gutter-lg;
+
+    h3 {
+      font-size: $font-size-xl;
+      font-weight: 700;
+      margin-bottom: $gutter-md;
+      color: $color-text;
+    }
+
+    .location {
+      font-size: $font-size-lg;
+      color: $color-text-secondary;
+      margin-bottom: $gutter-sm;
+      font-weight: 500;
+    }
+
+    .address {
+      font-size: $font-size-lg;
+      color: $color-text;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+  }
+
+  .map-container {
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    box-shadow: $shadow-md;
+    margin-bottom: $gutter-md;
+  }
+
+  .map-link {
+    display: inline-block;
+    font-size: $font-size-lg;
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+
+    &:hover {
+      color: darken($color-primary, 10%);
+      text-decoration: underline;
+    }
+  }
+}
