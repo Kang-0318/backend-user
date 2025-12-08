@@ -5,8 +5,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # 환경 설정 및 보안
+# 루트와 하위 폴더(.env, backend/.env, frontend/.env 등) 모두 제외
 .env
 *.env
+**/.env
+**/*.env
 .env.local
 .env.production
 .env.development
