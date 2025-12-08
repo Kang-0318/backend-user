@@ -4,13 +4,14 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '127.0.0.1',  // IPv6(::1) 대신 IPv4만 사용
-    port: 3001,         // 5173 대신 3001
+    host: '127.0.0.1',
+    port: 3001,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',  // 백엔드 포트
+        target: 'http://localhost:3000',  // ← 백엔드와 정확히 매칭
         changeOrigin: true,
-      },
-    },
-  },
+        secure: false
+      }
+    }
+  }
 })

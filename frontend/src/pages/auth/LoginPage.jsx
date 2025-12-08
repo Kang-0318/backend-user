@@ -1,6 +1,7 @@
+// frontend/src/pages/auth/LoginPage.jsx
 import React from "react";
-import LoginForm from "../../components/auth/LoginForm";
 import AuthImageWrap from "../../components/auth/AuthImageWrap";
+import LoginForm from "../../components/auth/LoginForm";
 
 const LoginPage = () => {
   return (

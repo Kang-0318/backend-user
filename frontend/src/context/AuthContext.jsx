@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
 
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
   };
 
-  // 로그인 유지 + 개발용 자동 로그인
+  // 로그인 유지
   useEffect(() => {
     const saved = localStorage.getItem("user");
 
@@ -30,20 +30,6 @@ export const AuthProvider = ({ children }) => {
       } catch {
         localStorage.removeItem("user");
       }
-    } else {
-      // ===============================
-      // 🔥 개발용 자동 로그인 코드 (백엔드 없이 MyPage 작업 가능)
-      // ===============================
-      const devUser = {
-        name: "Tomhoon",
-        email: "gnsdl9079@gmail.com",
-        profileImage: "",
-        phone: "010-5555-5555",
-        address: "경기도 화성시 도메이아파트 101동 101호",
-        dateOfBirth: "1999-01-01",
-      };
-      localStorage.setItem("user", JSON.stringify(devUser));
-      setUser(devUser);
     }
 
     setLoading(false);

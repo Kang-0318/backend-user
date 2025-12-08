@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios"; // 🔹 추가
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 const LoginForm = () => {
@@ -16,8 +16,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   // 환경변수에서 API 주소 불러오기 (없으면 localhost:3000)
-  const API_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  //const API_BASE_URL =
+    //import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,51 +30,69 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     setLoading(true);
     setError("");
-
+  
     try {
-      // 🔥 백엔드 로그인 API 호출
       const response = await axios.post(
-        `${API_BASE_URL}/api/auth/login`,
+        "/api/auth/login",  // ★ BASE_URL 제거, /api 한 번만 사용
         {
           email: formData.email,
           password: formData.password,
         },
         {
-          withCredentials: true, // 쿠키 기반이면 유지, 아니면 빼도 됨
+          withCredentials: true,
         }
       );
-
-      if (response.status === 200) {
-        const { user, token } = response.data;
-
-        // 🔥 컨텍스트에 유저 저장
-        login(user);
-
-        // 🔥 토큰 저장 (백엔드에서 token 내려주면)
-        if (token) {
-          localStorage.setItem("accessToken", token);
-        }
-
-        // Remember me 체크 시 플래그 저장
-        if (formData.rememberMe) {
-          localStorage.setItem("rememberMe", "true");
-        } else {
-          localStorage.removeItem("rememberMe");
-        }
-
-        navigate("/mypage");
+      
+  
+      // ★ 여기부터 수정
+      const { resultCode, message, data } = response.data || {};
+  
+      if (response.status !== 200 || resultCode !== "SUCCESS" || !data) {
+        throw new Error(message || "로그인에 실패했습니다.");
       }
+  
+      const user = {
+        _id: data._id,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        role: data.role,
+      };
+      const accessToken = data.token;
+      const refreshToken = data.refreshToken;
+  
+      // 컨텍스트에 유저 저장
+      login(user);
+  
+      // 토큰 저장
+      if (accessToken) {
+        localStorage.setItem("accessToken", accessToken);
+      }
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+  
+      // Remember me
+      if (formData.rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+      } else {
+        localStorage.removeItem("rememberMe");
+      }
+  
+      navigate("/mypage");
+      // ★ 여기까지 수정
     } catch (err) {
       const errorMessage =
-        err.response?.data?.message || "로그인 중 오류가 발생했습니다.";
+        err.response?.data?.message || err.message || "로그인 중 오류가 발생했습니다.";
       setError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleSocialLogin = (provider) => {
     console.log(`${provider} login`);
