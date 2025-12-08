@@ -3,6 +3,7 @@ import Header from "../common/Header";
 import Footer from "../common/Footer";
 import MyPageNav from "../mypage/MyPageNav";
 import MyProfile from "../mypage/MyProfile";
+import FloatingNav from "../common/FloatingNav";
 
 const MyPageLayout = () => {
  return (
@@ -20,6 +21,8 @@ const MyPageLayout = () => {
    </div>
 
    <Footer />
+
+   <FloatingNav />
   </div>
  );
 };

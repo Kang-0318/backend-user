@@ -34,28 +34,19 @@ const HotelReviews = ({
    {/* 리뷰 컴포넌트 내용 작성 */}
    <ul className="review-list">
     {reviews && reviews.length > 0 ? (
-     reviews.map((review) => {
-       const userName = review.userId?.name || review.user || "익명";
-       const profileImageUrl = `https://i.pravatar.cc/150?img=${review.id}`;
-       
-       return (
-        <li key={review.id}>
-         <div className="profile-image">
-          <img src={profileImageUrl} alt={userName} />
-         </div>
-         <div className="review-content">
-          <div className="review-header">
-           <span className="review-author">{userName}</span>
-           <span className="review-rating">{renderStars(review.rating)}</span>
-           <span className="review-date">
-            {new Date(review.createdAt || review.date).toLocaleDateString()}
-           </span>
-          </div>
-          <p className="review-comment">{review.comment}</p>
-         </div>
-        </li>
-       );
-     })
+     reviews.map((review) => (
+      <li key={review.id}>
+       <div className="profile-image">
+        <img src="sample.jpg" alt={`${review.userId?.name || "익명"}`} />
+       </div>
+       <span className="review-author">{review.userId?.name || "익명"}</span>
+       <span className="review-rating">{renderStars(review.rating)}</span>
+       <span className="review-date">
+        {new Date(review.createdAt || review.date).toLocaleDateString()}
+       </span>
+       {review.comment}
+      </li>
+     ))
     ) : (
      <li>리뷰가 없습니다.</li>
     )}

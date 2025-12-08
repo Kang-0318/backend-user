@@ -1,7 +1,7 @@
 /* src/styles/common/_base.scss */
 @use "sass:color";
-@import "variables";
-@import "mixins";
+@use "variables" as *;
+@use "mixins" as *;
 
 .inner {
   max-width: $max-width-container;

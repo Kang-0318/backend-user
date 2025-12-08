@@ -22,10 +22,6 @@
       border-radius: 8px;
       text-align: center;
       transition: transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
 
       &:hover {
         transform: translateY(-2px);
@@ -35,53 +31,22 @@
       &.rating-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        .rating-stars {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 4px;
-          margin-bottom: 10px;
-          
-          .star-filled {
-            color: #ffd700;
-            font-size: 20px;
-          }
-          
-          .star-half {
-            color: #ffd700;
-            font-size: 20px;
-            opacity: 0.5;
-          }
-          
-          .star-empty {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 20px;
-          }
-        }
 
         .rating-score {
           font-size: 48px;
           font-weight: 700;
           margin-bottom: 5px;
-          text-align: center;
         }
 
         .rating-label {
           font-size: 16px;
           font-weight: 600;
           margin-bottom: 5px;
-          text-align: center;
         }
 
         .review-count {
           font-size: 14px;
           opacity: 0.9;
-          text-align: center;
         }
       }
 
@@ -89,16 +54,12 @@
         font-size: 32px;
         color: #667eea;
         margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
 
       .feature-label {
         font-size: 14px;
         font-weight: 600;
         color: #333;
-        text-align: center;
       }
     }
   }

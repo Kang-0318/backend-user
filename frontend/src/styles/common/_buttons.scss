@@ -1,6 +1,6 @@
 @use "sass:color";
-@import "variables";
-@import "mixins";
+@use "variables" as *;
+@use "mixins" as *;
 
 /* 기본 버튼 */
 .btn {
@@ -50,8 +50,8 @@
   border-radius: $border-radius-sm;
 
   &:hover {
-    background: darken(#279c79, 8%) !important;
-    border-color: darken(#279c79, 8%) !important;
+    background: color.adjust(#279c79, $lightness: -8%) !important;
+    border-color: color.adjust(#279c79, $lightness: -8%) !important;
   }
 }
 
@@ -59,14 +59,14 @@
    🔥 2. ACCENT 버튼 (Sign Up)
    ================================ */
 .btn--accent {
-  background: lighten(#279c79, 25%) !important;
+  background: color.adjust(#279c79, $lightness: 25%) !important;
   color: #fff !important;
-  border-color: lighten(#279c79, 25%) !important;
+  border-color: color.adjust(#279c79, $lightness: 25%) !important;
   border-radius: $border-radius-sm;
 
   &:hover {
-    background: lighten(#279c79, 15%) !important;
-    border-color: lighten(#279c79, 15%) !important;
+    background: color.adjust(#279c79, $lightness: 15%) !important;
+    border-color: color.adjust(#279c79, $lightness: 15%) !important;
   }
 }
 
@@ -130,19 +130,5 @@
 
   &:hover {
     text-decoration: underline;
-  }
-}
-
-/* ================================
-   🔥 3. SECONDARY 버튼
-   ================================ */
-.btn--secondary {
-  background: transparent !important;
-  color: $color-text !important;
-  border-color: $color-border !important;
-
-  &:hover {
-    background: $color-bg-alt !important;
-    border-color: $color-text-secondary !important;
   }
 }

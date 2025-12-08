@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../api/axiosConfig";
+import axios from "axios"; // 🔥 추가
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -13,12 +13,15 @@ const SignupForm = () => {
   });
 
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // 🔥 추가
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"; // 🔥 추가
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,16 +36,16 @@ const SignupForm = () => {
 
   const togglePasswordVisibility = (field) => {
     if (field === "password") {
-      setPasswordVisible((prev) => !prev);
+      setPasswordVisible(!passwordVisible);
     } else {
-      setConfirmPasswordVisible((prev) => !prev);
+      setConfirmPasswordVisible(!confirmPasswordVisible);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 필수 검증
+    // 🔥 필수 검증
     if (
       !formData.nickname ||
       !formData.email ||
@@ -67,22 +70,17 @@ const SignupForm = () => {
     setError("");
 
     try {
-      // 백엔드 회원가입 API 호출
-      const res = await axiosInstance.post("/auth/register", {
+      // 🔥 백엔드 회원가입 API 호출
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         email: formData.email,
         password: formData.password,
         name: formData.nickname,
         phone_number: formData.phoneNumber || "",
       });
 
-      // 백엔드에서 201 + success 응답 가정
-      if (res.status === 201 || res.data?.success) {
-        alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+      if (response.status === 201) {
+        alert("회원가입이 완료되었습니다.");
         navigate("/login");
-      } else {
-        const msg =
-          res.data?.message || "회원가입 처리 중 알 수 없는 오류가 발생했습니다.";
-        setError(msg);
       }
     } catch (err) {
       const errorMessage =
@@ -191,7 +189,9 @@ const SignupForm = () => {
             <button
               type="button"
               className="password-toggle"
-              onClick={() => togglePasswordVisibility("confirmPassword")}
+              onClick={() =>
+                togglePasswordVisibility("confirmPassword")
+              }
             >
               {confirmPasswordVisible ? "🙈" : "👁️"}
             </button>

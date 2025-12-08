@@ -1,17 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "../../styles/components/hotelpage/AvailableRooms.scss";
 
 
-const AvailableRooms = ({ rooms, hotelId }) => {
- const navigate = useNavigate();
-
- const handleBookRoom = (room) => {
-  const params = new URLSearchParams();
-  params.append("roomId", room.id);
-  navigate(`/booking/${hotelId}?${params.toString()}`);
- };
-
+const AvailableRooms = ({ rooms }) => {
  return (
   <div className="available-rooms">
     <h3>예약 가능한 객실</h3>
@@ -21,19 +12,12 @@ const AvailableRooms = ({ rooms, hotelId }) => {
       <div className="img-wrap">
        <img src={room.images[0]} alt={room.name} />
       </div>
-      <div className="room-info">
-       <h3 className="room-name">{room.name}</h3>
-       <p className="room-type">{room.type}</p>
-      </div>
+      <h3 className="room-name">{room.name}</h3>
+      <p className="room-type">{room.type}</p>
      </div>
      <div className="right">
       <p className="room-price">{room.price.toLocaleString()}원</p>
-      <button 
-       className="btn btn--primary" 
-       onClick={() => handleBookRoom(room)}
-      >
-       예약하기
-      </button>
+      <button className="btn btn--primary">예약하기</button>
      </div>
     </div>
    ))}

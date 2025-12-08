@@ -1,225 +1,81 @@
-@use "../../common/variables" as *;
-@use "../../common/mixins";
-
-.gallery-modal-overlay {
+.gallery-modal {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
+  width: 100%;
+  height: 100%;
   z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: $gutter-lg;
-  animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.modal-image {
+  max-width: 85vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
-.gallery-modal-content {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  gap: $gutter-md;
-  animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal-close-btn {
+/* 닫기 버튼 */
+.close-btn {
   position: absolute;
   top: -50px;
   right: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
+  background: #fff;
   border-radius: 50%;
+  width: 36px;
+  height: 36px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  border: none;
   cursor: pointer;
-  font-size: 20px;
-  transition: all 0.2s;
-  z-index: 10000;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-  }
+  font-size: 18px;
 }
 
-.modal-main-image {
-  position: relative;
-  width: 100%;
-  height: 70vh;
-  min-height: 500px;
-  border-radius: $border-radius-md;
-  overflow: hidden;
-  background: #000;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .image-counter {
-    position: absolute;
-    bottom: $gutter-md;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: $gutter-sm $gutter-md;
-    border-radius: $border-radius-sm;
-    font-size: $font-size-base;
-    font-weight: 600;
-  }
-}
-
-.modal-nav-btn {
+/* 좌/우 네비게이션 버튼 */
+.nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.85);
   border: none;
-  color: white;
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  font-size: 24px;
-  transition: all 0.2s;
-  z-index: 10;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  &.modal-nav-prev {
-    left: $gutter-md;
-  }
-
-  &.modal-nav-next {
-    right: $gutter-md;
-  }
-}
-
-.modal-thumbnails {
   display: flex;
-  gap: $gutter-sm;
-  overflow-x: auto;
-  padding: $gutter-sm 0;
   justify-content: center;
+  align-items: center;
 
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.5);
-    }
-  }
-
-  .thumbnail-item {
-    width: 100px;
-    height: 100px;
-    border-radius: $border-radius-sm;
-    overflow: hidden;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: all 0.2s;
-    flex-shrink: 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    &:hover {
-      transform: scale(1.05);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    &.active {
-      border-color: white;
-      transform: scale(1.1);
-    }
+  svg {
+    font-size: 20px;
+    color: #333;
   }
 }
 
-@media (max-width: 768px) {
-  .gallery-modal-content {
-    padding: $gutter-md;
-  }
+.nav-btn.left {
+  left: -60px;
+}
 
-  .modal-main-image {
-    height: 60vh;
-    min-height: 400px;
-  }
-
-  .modal-nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-
-    &.modal-nav-prev {
-      left: $gutter-sm;
-    }
-
-    &.modal-nav-next {
-      right: $gutter-sm;
-    }
-  }
-
-  .modal-thumbnails {
-    .thumbnail-item {
-      width: 80px;
-      height: 80px;
-    }
-  }
-
-  .modal-close-btn {
-    top: -40px;
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-  }
+.nav-btn.right {
+  right: -60px;
 }

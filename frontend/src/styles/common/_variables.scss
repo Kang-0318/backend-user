@@ -8,7 +8,8 @@
 /* 메인 브랜드 컬러 (초록 계열 통일) */
 $color-primary: #279c79;
 $color-secondary: #1e293b;
-$color-accent: lighten(#279c79, 25%);
+/* color.adjust 사용으로 deprecated 함수 대체 */
+$color-accent: color.adjust($color-primary, $lightness: 25%);
 
 /* Background */
 $color-bg: #ffffff;
@@ -94,8 +95,8 @@ $shadow-2xl: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
    🌈 GRADIENTS (초록 팔레트로 통일)
    ======================= */
 $gradient-gray-light: linear-gradient(135deg, #f9fafb, #f3f4f6);
-$gradient-gray-medium: linear-gradient(135deg, #279c79, darken(#279c79, 12%));
-$gradient-gray-dark: linear-gradient(135deg, darken(#279c79, 15%), darken(#279c79, 25%));
+$gradient-gray-medium: linear-gradient(135deg, $color-primary, color.adjust($color-primary, $lightness: -12%));
+$gradient-gray-dark: linear-gradient(135deg, color.adjust($color-primary, $lightness: -15%), color.adjust($color-primary, $lightness: -25%));
 
 /* =======================
    📌 HEADER HEIGHT

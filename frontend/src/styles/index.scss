@@ -1,15 +1,15 @@
 // Reset & Base
-@import "./common/reset";
-@import "./common/variables";
-@import "./common/mixins";
-@import "./common/base";
-@import "./common/buttons";
-@import "./common/forms";
+@use "./common/reset" as *;
+@use "./common/variables" as *;
+@use "./common/mixins" as *;
+@use "./common/base" as *;
+@use "./common/buttons" as *;
+@use "./common/forms" as *;
 
 // Layouts
-@import "./layouts/AuthPageLayout";
-@import "./common/authLayout";
+@use "./layouts/AuthPageLayout" as *;
+@use "./common/authLayout" as *;
 
 // Components
-@import "./components/authImageWrap";
+@use "./components/authImageWrap" as *;
 

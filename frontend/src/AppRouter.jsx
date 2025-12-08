@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
 import AuthLayout from "./components/layouts/AuthLayout";
 import MyPageLayout from "./components/layouts/MyPageLayout";
@@ -13,6 +13,10 @@ import HotelListPage from "./pages/search/HotelListPage";
 import HotelDetailPage from "./pages/hotel/HotelDetailPage";
 
 import BookingStepLayout from "./pages/booking/BookingStepLayout";
+import BookingStepDates from "./pages/booking/BookingStepDates";
+import BookingStepRoom from "./pages/booking/BookingStepRoom";
+import BookingStepExtras from "./pages/booking/BookingStepExtras";
+import BookingStepPayment from "./pages/booking/BookingStepPayment";
 import BookingComplete from "./pages/booking/BookingComplete";
 
 import LoginPage from "./pages/auth/LoginPage";
@@ -38,6 +42,7 @@ import FaqPage from "./pages/support/FaqPage";
 import NoticeListPage from "./pages/support/NoticeListPage";
 import NoticeDetailPage from "./pages/support/NoticeDetailPage";
 import ContactPage from "./pages/support/ContactPage";
+import SupportPage from "./pages/support/SupportPage";
 
 import NotFoundPage from "./pages/common/NotFoundPage";
 
@@ -69,20 +74,22 @@ const AppRouter = () => {
        <BookingStepLayout />
       </ProtectedRoute>
      }
-    />
+    >
+     {/* /booking/:hotelId */}
+     <Route index element={<BookingStepDates />} />
+     {/* /booking/:hotelId/room */}
+     <Route path="room" element={<BookingStepRoom />} />
+     {/* /booking/:hotelId/extras */}
+     <Route path="extras" element={<BookingStepExtras />} />
+     {/* /booking/:hotelId/payment */}
+     <Route path="payment" element={<BookingStepPayment />} />
      {/* /booking/:hotelId/complete */}
-     <Route
-      path="booking/:hotelId/complete"
-      element={
-       <ProtectedRoute>
-        <BookingComplete />
-       </ProtectedRoute>
-      }
-     />
+     <Route path="complete" element={<BookingComplete />} />
+    </Route>
 
     {/* 고객센터 / 공지 / FAQ / 문의 */}
     <Route path="support">
-     <Route index element={<FaqPage />} />
+     <Route index element={<SupportPage />} />
      <Route path="faq" element={<FaqPage />} />
      <Route path="notices" element={<NoticeListPage />} />
      <Route path="notices/:noticeId" element={<NoticeDetailPage />} />
@@ -129,6 +136,9 @@ const AppRouter = () => {
       <Route path="google/callback" element={<GoogleCallbackPage />} />
      </Route>
     </Route>
+
+    {/* 편의용 별칭: /wishlist -> /mypage/wishlist */}
+    <Route path="wishlist" element={<Navigate to="/mypage/wishlist" replace />} />
 
     {/* 404 */}
     <Route path="*" element={<NotFoundPage />} />

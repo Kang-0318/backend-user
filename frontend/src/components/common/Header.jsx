@@ -34,7 +34,7 @@ const Header = () => {
 
           {isAuthed && (
             <NavLink
-              to="/wishlist"
+              to="/mypage/wishlist"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               <span className="nav-icon">❤️</span> 찜하기
